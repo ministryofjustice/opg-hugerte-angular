@@ -1,7 +1,7 @@
 {
   "name": "@hugerte/hugerte-angular",
   "description": "HugeRTE Angular Component",
-  "version": "",
+  "version": "1.0.0",
   "repository": "https://github.com/hugerte/hugerte-angular.git",
   "license": "MIT",
   "private": false,
