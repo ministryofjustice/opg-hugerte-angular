@@ -1,3 +1,12 @@
+/**
+ * Copyright (c) 2022 Ephox Corporation DBA Tiny Technologies, Inc.
+ * Copyright (c) 2025 HugeRTE contributors
+ *
+ * This file is part of the HugeRTE Angular integration.
+ * Licensed under the MIT license.
+ * See https://github.com/hugerte/hugerte-angular/blob/main/LICENSE.txt
+ *
+ */
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import {
@@ -16,16 +25,16 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { FormsModule, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
-import { getTinymce } from '../TinyMCE';
-import { listenTinyMCEEvent, bindHandlers, isTextarea, mergePlugins, uuid, noop, isNullOrUndefined } from '../utils/Utils';
+import { Subject, Observable, takeUntil } from 'rxjs';
+import { getHugeRTE } from '../HugeRTE';
+import { listenHugeRTEEvent, bindHandlers, noop, isNullOrUndefined } from '../utils/Utils';
 import { EventObj, Events } from './Events';
-import { ScriptLoader } from '../utils/ScriptLoader';
-import type { Editor as TinyMCEEditor, TinyMCE } from 'tinymce';
+import type { Editor as HugeRTEEditor, HugeRTE } from 'hugerte';
+import { ScriptLoader, isTextarea, mergePlugins, uuid } from '@hugerte/framework-integration-shared';
 
-type EditorOptions = Parameters<TinyMCE['init']>[0];
+type EditorOptions = Parameters<HugeRTE['init']>[0];
 
-export const TINYMCE_SCRIPT_SRC = new InjectionToken<string>('TINYMCE_SCRIPT_SRC');
+export const HUGERTE_SCRIPT_SRC = new InjectionToken<string>('HUGERTE_SCRIPT_SRC');
 
 const EDITOR_COMPONENT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -33,7 +42,7 @@ const EDITOR_COMPONENT_VALUE_ACCESSOR = {
   multi: true
 };
 
-export type Version = `${'4' | '5' | '6' | '7'}${'' | '-dev' | '-testing' | `.${number}` | `.${number}.${number}`}`;
+export type Version = `${'1'}${'' | `.${number}` | `.${number}.${number}`}`;
 
 @Component({
   selector: 'editor',
@@ -46,13 +55,11 @@ export type Version = `${'4' | '5' | '6' | '7'}${'' | '-dev' | '-testing' | `.${
 })
 
 /**
- * @see {@link https://www.tiny.cloud/docs/tinymce/7/angular-ref/} for the TinyMCE Angular Technical Reference
+ * TODO add docs for inputs
  */
 export class EditorComponent extends Events implements AfterViewInit, ControlValueAccessor, OnDestroy {
 
-  @Input() public cloudChannel: Version = '7';
-  @Input() public apiKey = 'no-api-key';
-  @Input() public licenseKey?: string;
+  @Input() public cdnVersion: Version = '1';
   @Input() public init?: EditorOptions;
   @Input() public id = '';
   @Input() public initialValue?: string;
@@ -89,7 +96,7 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
   private _elementRef: ElementRef;
   private _element?: HTMLElement;
   private _disabled?: boolean;
-  private _editor?: TinyMCEEditor;
+  private _editor?: HugeRTEEditor;
 
   private onTouchedCallback = noop;
   private onChangeCallback: any;
@@ -101,7 +108,7 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
     ngZone: NgZone,
     private cdRef: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Optional() @Inject(TINYMCE_SCRIPT_SRC) private tinymceScriptSrc?: string
+    @Optional() @Inject(HUGERTE_SCRIPT_SRC) private hugerteScriptSrc?: string
   ) {
     super();
     this._elementRef = elementRef;
@@ -130,17 +137,21 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
 
   public ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.id = this.id || uuid('tiny-angular');
+      this.id = this.id || uuid('hugerte-angular');
       this.inline = this.inline !== undefined ? this.inline !== false : !!(this.init?.inline);
       this.createElement();
-      if (getTinymce() !== null) {
+      if (getHugeRTE() !== null) {
+        console.log(getHugeRTE()!.baseURI.source)
         this.initialise();
       } else if (this._element && this._element.ownerDocument) {
-        // Caretaker note: the component might be destroyed before the script is loaded and its code is executed.
-        // This will lead to runtime exceptions if `initialise` will be called when the component has been destroyed.
-        ScriptLoader.load(this._element.ownerDocument, this.getScriptSrc())
-          .pipe(takeUntil(this.destroy$))
-          .subscribe(this.initialise);
+        new Observable<void>((observer) => {
+          ScriptLoader.load(this._element!.ownerDocument, this.getScriptSrc(), () => {
+            observer.next();
+            observer.complete();
+          });
+        })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(this.initialise);
       }
     }
   }
@@ -148,9 +159,7 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
   public ngOnDestroy() {
     this.destroy$.next();
 
-    if (getTinymce() !== null) {
-      getTinymce().remove(this._editor);
-    }
+    this._editor && getHugeRTE()?.remove(this._editor);
   }
 
   public createElement() {
@@ -160,7 +169,7 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
       const existingElement = document.getElementById(this.id);
       if (existingElement && existingElement !== this._elementRef.nativeElement) {
         /* eslint no-console: ["error", { allow: ["warn"] }] */
-        console.warn(`TinyMCE-Angular: an element with id [${this.id}] already exists. Editors with duplicate Id will not be able to mount`);
+        console.warn(`HugeRTE-Angular: an element with id [${this.id}] already exists. Editors with duplicate Id will not be able to mount`);
       }
       this._element.id = this.id;
       if (isTextarea(this._element)) {
@@ -177,13 +186,12 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
       target: this._element,
       inline: this.inline,
       readonly: this.disabled,
-      license_key: this.licenseKey,
       plugins: mergePlugins((this.init && this.init.plugins) as string, this.plugins),
       toolbar: this.toolbar || (this.init && this.init.toolbar),
-      setup: (editor: TinyMCEEditor) => {
+      setup: (editor: HugeRTEEditor) => {
         this._editor = editor;
 
-        listenTinyMCEEvent(editor, 'init', this.destroy$).subscribe(() => {
+        listenHugeRTEEvent(editor, 'init', this.destroy$).subscribe(() => {
           this.initEditor(editor);
         });
 
@@ -200,23 +208,25 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
     }
 
     this.ngZone.runOutsideAngular(() => {
-      getTinymce().init(finalInit);
+      getHugeRTE()?.init(finalInit);
     });
   };
 
   private getScriptSrc() {
-    return isNullOrUndefined(this.tinymceScriptSrc) ?
-      `https://cdn.tiny.cloud/1/${this.apiKey}/tinymce/${this.cloudChannel}/tinymce.min.js` :
-      this.tinymceScriptSrc;
+    let src = isNullOrUndefined(this.hugerteScriptSrc) ?
+      `https://cdn.jsdelivr.net/npm/hugerte@${this.cdnVersion}/hugerte.min.js` :
+      this.hugerteScriptSrc;
+
+    return src;
   }
 
-  private initEditor(editor: TinyMCEEditor) {
-    listenTinyMCEEvent(editor, 'blur', this.destroy$).subscribe(() => {
+  private initEditor(editor: HugeRTEEditor) {
+    listenHugeRTEEvent(editor, 'blur', this.destroy$).subscribe(() => {
       this.cdRef.markForCheck();
       this.ngZone.run(() => this.onTouchedCallback());
     });
 
-    listenTinyMCEEvent(editor, this.modelEvents, this.destroy$).subscribe(() => {
+    listenHugeRTEEvent(editor, this.modelEvents, this.destroy$).subscribe(() => {
       this.cdRef.markForCheck();
       this.ngZone.run(() => this.emitOnChange(editor));
     });
@@ -234,7 +244,7 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
     }
   }
 
-  private emitOnChange(editor: TinyMCEEditor) {
+  private emitOnChange(editor: HugeRTEEditor) {
     if (this.onChangeCallback) {
       this.onChangeCallback(editor.getContent({ format: this.outputFormat }));
     }

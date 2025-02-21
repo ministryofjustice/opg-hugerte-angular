@@ -20,7 +20,7 @@
     ]
   },
   "include": [
-    "tinymce-angular-component/src/**/*",
+    "hugerte-angular-component/src/**/*",
     "stories/**/*"
   ]
 }

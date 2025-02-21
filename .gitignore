@@ -4,6 +4,7 @@
 /dist
 /lib
 /scratch
+.yarn
 
 # dependencies
 /node_modules

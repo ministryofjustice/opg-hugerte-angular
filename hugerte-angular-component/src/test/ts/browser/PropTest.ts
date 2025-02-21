@@ -9,9 +9,8 @@ import { captureLogs, throwTimeout } from '../alien/TestHelpers';
 import { concatMap, distinct, firstValueFrom, mergeMap, of, toArray } from 'rxjs';
 import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import type { Editor } from 'tinymce';
+import type { Editor } from 'hugerte';
 import { expect } from 'chai';
-import { Fun } from '@ephox/katamari';
 import { Waiter } from '@ephox/agar';
 
 describe('PropTest', () => {
@@ -21,7 +20,7 @@ describe('PropTest', () => {
       const [ message ] = log;
       return (
         typeof message === 'string' &&
-        message.includes('TinyMCE-Angular: an element with id [') &&
+        message.includes('HugeRTE-Angular: an element with id [') &&
         message.includes('Editors with duplicate Id will not be able to mount')
       );
     });
@@ -34,7 +33,7 @@ describe('PropTest', () => {
           .map((ed) => ed.editor)
           .filter((editor): editor is Editor => !!editor)
       ).pipe(
-        mergeMap(Fun.identity),
+        mergeMap(x => x),
         distinct((editor) => editor.id),
         concatMap((editor) => new Promise<Editor>((resolve) => editor.once('SkinLoaded', () => resolve(editor)))),
         toArray(),
@@ -42,7 +41,7 @@ describe('PropTest', () => {
       )
     );
 
-  eachVersionContext([ '4', '5', '6', '7' ], () => {
+  eachVersionContext([ '1' ], () => {
     context('Single editor with ID', () => {
       @Component({
         standalone: true,

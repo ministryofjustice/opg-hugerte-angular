@@ -2,7 +2,7 @@
   "overrides": [
     {
       "files": [
-        "tinymce-angular-component/src/**/*.ts",
+        "hugerte-angular-component/src/**/*.ts",
         "stories/**/*.ts"
       ],
       "excludedFiles": [

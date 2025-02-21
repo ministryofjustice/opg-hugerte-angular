@@ -1,9 +1,9 @@
 import { Output, EventEmitter, Directive } from '@angular/core';
-import type { Editor as TinyMCEEditor } from 'tinymce';
+import type { Editor as HugeRTEEditor } from 'hugerte';
 
 export interface EventObj<T> {
   event: T;
-  editor: TinyMCEEditor;
+  editor: HugeRTEEditor;
 }
 
 @Directive()
@@ -11,6 +11,8 @@ export class Events {
   @Output() public onBeforePaste: EventEmitter<EventObj<ClipboardEvent>> = new EventEmitter();
   @Output() public onBlur: EventEmitter<EventObj<FocusEvent>> = new EventEmitter();
   @Output() public onClick: EventEmitter<EventObj<MouseEvent>> = new EventEmitter();
+  // TODO: something better than any? But comment change is probably from a TinyMCE premium plugin anyway. Check in React for type maybe.
+  @Output() public onCommentChange: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onCompositionEnd: EventEmitter<EventObj<CompositionEvent>> = new EventEmitter();
   @Output() public onCompositionStart: EventEmitter<EventObj<CompositionEvent>> = new EventEmitter();
   @Output() public onCompositionUpdate: EventEmitter<EventObj<CompositionEvent>> = new EventEmitter();
@@ -55,12 +57,12 @@ export class Events {
   @Output() public onHide: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onInit: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onInput: EventEmitter<EventObj<any>> = new EventEmitter();
-  @Output() public onInitNgModel: EventEmitter<EventObj<any>> = new EventEmitter();
+  @Output() public onInitNgModel: EventEmitter<EventObj<any>> = new EventEmitter(); // TODO not in @hugerte/framework-integration-shared
   @Output() public onLoadContent: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onNodeChange: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onPostProcess: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onPostRender: EventEmitter<EventObj<any>> = new EventEmitter();
-  @Output() public onPreInit: EventEmitter<EventObj<any>> = new EventEmitter();
+  @Output() public onPreInit: EventEmitter<EventObj<any>> = new EventEmitter(); // TODO not in @hugerte/framework-integration-shared
   @Output() public onPreProcess: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onProgressState: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onRedo: EventEmitter<EventObj<any>> = new EventEmitter();
@@ -78,73 +80,3 @@ export class Events {
   @Output() public onUndo: EventEmitter<EventObj<any>> = new EventEmitter();
   @Output() public onVisualAid: EventEmitter<EventObj<any>> = new EventEmitter();
 }
-
-export const validEvents: (keyof Events)[] = [
-  'onActivate',
-  'onAddUndo',
-  'onBeforeAddUndo',
-  'onBeforeExecCommand',
-  'onBeforeGetContent',
-  'onBeforeRenderUI',
-  'onBeforeSetContent',
-  'onBeforePaste',
-  'onBlur',
-  'onChange',
-  'onClearUndos',
-  'onClick',
-  'onCompositionEnd',
-  'onCompositionStart',
-  'onCompositionUpdate',
-  'onContextMenu',
-  'onCopy',
-  'onCut',
-  'onDblclick',
-  'onDeactivate',
-  'onDirty',
-  'onDrag',
-  'onDragDrop',
-  'onDragEnd',
-  'onDragGesture',
-  'onDragOver',
-  'onDrop',
-  'onExecCommand',
-  'onFocus',
-  'onFocusIn',
-  'onFocusOut',
-  'onGetContent',
-  'onHide',
-  'onInit',
-  'onInput',
-  'onKeyDown',
-  'onKeyPress',
-  'onKeyUp',
-  'onLoadContent',
-  'onMouseDown',
-  'onMouseEnter',
-  'onMouseLeave',
-  'onMouseMove',
-  'onMouseOut',
-  'onMouseOver',
-  'onMouseUp',
-  'onNodeChange',
-  'onObjectResizeStart',
-  'onObjectResized',
-  'onObjectSelected',
-  'onPaste',
-  'onPostProcess',
-  'onPostRender',
-  'onPreProcess',
-  'onProgressState',
-  'onRedo',
-  'onRemove',
-  'onReset',
-  'onResizeEditor',
-  'onSaveContent',
-  'onSelectionChange',
-  'onSetAttrib',
-  'onSetContent',
-  'onShow',
-  'onSubmit',
-  'onUndo',
-  'onVisualAid'
-];

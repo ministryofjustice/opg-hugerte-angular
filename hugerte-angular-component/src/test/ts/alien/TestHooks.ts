@@ -4,11 +4,13 @@ import { Type } from '@angular/core';
 import { EditorComponent, Version } from '../../../main/ts/editor/editor.component';
 import { firstValueFrom, map, switchMap, tap } from 'rxjs';
 import { By } from '@angular/platform-browser';
+
+// TODO drop katamari
 import { Optional, Singleton } from '@ephox/katamari';
-import { VersionLoader } from '@tinymce/miniature';
-import { deleteTinymce, throwTimeout } from './TestHelpers';
+import { pLoadVersion, cleanupGlobalHugeRTE } from '@hugerte/framework-integration-shared';
+import { throwTimeout } from './TestHelpers';
 import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
-import type { Editor } from 'tinymce';
+import type { Editor } from 'hugerte';
 
 export const fixtureHook = <T = unknown>(component: Type<T>, moduleDef: TestModuleMetadata) => {
   before(async () => {
@@ -18,12 +20,12 @@ export const fixtureHook = <T = unknown>(component: Type<T>, moduleDef: TestModu
   return () => TestBed.createComponent(component);
 };
 
-export const tinymceVersionHook = (version: Version) => {
+export const hugerteVersionHook = (version: Version) => {
   before(async () => {
-    await VersionLoader.pLoadVersion(version);
+    await pLoadVersion(version);
   });
   after(() => {
-    deleteTinymce();
+    cleanupGlobalHugeRTE();
   });
 };
 
@@ -99,7 +101,7 @@ export const editorHook = <T = unknown>(component: Type<T>, moduleDef: TestModul
 export const eachVersionContext = (versions: Version[], fn: (version: Version) => void) =>
   versions.forEach((version) =>
     context(`With version ${version}`, () => {
-      tinymceVersionHook(version);
+      hugerteVersionHook(version);
       fn(version);
     })
   );
