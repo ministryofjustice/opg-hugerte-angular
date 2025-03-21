@@ -10,6 +10,7 @@ The HugeRTE Angular component 1.0.0 is based on the TinyMCE Angular component 9.
 
 ### Fixed
 - The package was missing a required dependency on `@hugerte/framework-integration-shared`.
+- Updated dependencies.
 
 ## 1.0.1 - 2025-02-21
 
