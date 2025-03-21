@@ -5,6 +5,9 @@
   "repository": "https://github.com/hugerte/hugerte-angular.git",
   "license": "MIT",
   "private": false,
+  "dependencies": {
+    "@hugerte/framework-integration-shared": "^1.0.1"
+  },
   "peerDependencies": {
     "@angular/core": ">=16.0.0",
     "@angular/common": ">=16.0.0",
