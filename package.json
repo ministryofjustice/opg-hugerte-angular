@@ -70,7 +70,16 @@
   },
   "resolutions": {
     "tar-fs": "^3.0.9",
-    "ws": "^8.17.1"
+    "rollup": "^4.24.4",
+    "ws": "^8.17.1",
+    "axios": "^1.12.0",
+    "cross-spawn": "^7.0.5",
+    "esbuild": "^0.24.2",
+    "http-proxy-middleware": "^3.0.5",
+    "vite": "^5.4.19",
+    "webpack": "^5.94.0",
+    "webpack-dev-server": "^5.2.1",
+    "path-to-regexp": "^0.1.12"
   },
   "version": "1.0.2",
   "name": "@hugerte/hugerte-angular",
