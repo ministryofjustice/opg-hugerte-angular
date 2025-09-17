@@ -2,7 +2,8 @@
 name: Feature request
 about: Suggest a feature for this project
 title: ''
-labels: 'enhancement'
+type: 'feature'
+labels: ''
 assignees: ''
 
 ---
