@@ -33,7 +33,7 @@
     "@ephox/agar": "8.0.1",
     "@ephox/bedrock-client": "^14.1.1",
     "@ephox/bedrock-server": "^15.0.2",
-    "@hugerte/framework-integration-shared": "1.0.1",
+    "@hugerte/framework-integration-shared": "^1.0.1",
     "@storybook/addon-essentials": "^8.6.8",
     "@storybook/addon-interactions": "^8.6.11",
     "@storybook/addon-links": "^8.2.5",
