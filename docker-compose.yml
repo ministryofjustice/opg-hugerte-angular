@@ -1,0 +1,5 @@
+services:
+  build:
+    build: .
+    working_dir: /app
+    command: yarn build
