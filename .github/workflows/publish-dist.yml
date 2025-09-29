@@ -33,14 +33,18 @@ jobs:
           rm -rf dist-repo/*
           cp -r dist/* dist-repo/
 
-      - name: Commit and push changes
-        run: |
-          cd dist-repo
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Update dist from opg-hugerte-angular @ $GITHUB_SHA" || echo "No changes to commit"
-          git push origin main
+      - name: Create Pull Request in dist repo
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          path: dist-repo
+          commit-message: "Update dist from opg-hugerte-angular @ $GITHUB_SHA"
+          branch: update-dist-${{ github.sha }}
+          title: "Update dist from opg-hugerte-angular"
+          body: |
+            Automated PR to update the dist package.
+            Source commit: $GITHUB_SHA
+          base: main
 
       - name: Tag release in dist repo (only on tag push)
         if: startsWith(github.ref, 'refs/tags/v')
