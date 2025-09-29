@@ -31,7 +31,7 @@ jobs:
       - name: Copy built dist into dist repo
         run: |
           rm -rf dist-repo/*
-          cp -r dist/huderte-angular/* dist-repo/
+          cp -r dist/hugerte-angular/* dist-repo/
 
       - name: Create Pull Request in dist repo
         uses: peter-evans/create-pull-request@v6
