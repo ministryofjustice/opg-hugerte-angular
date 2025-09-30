@@ -38,12 +38,12 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           path: dist-repo
-          commit-message: "Update dist from opg-hugerte-angular @ $GITHUB_SHA"
+          commit-message: "Update dist from opg-hugerte-angular @ ${{ github.sha }}"
           branch: update-dist-${{ github.sha }}
           title: "Update dist from opg-hugerte-angular"
           body: |
             Automated PR to update the dist package.
-            Source commit: $GITHUB_SHA
+            Source commit: ${{ github.sha }}
           base: main
 
       - name: Tag release in dist repo (only on tag push)
