@@ -17,10 +17,9 @@ describe('NgModelTest', () => {
 
   eachVersionContext([ '1' ], () => {
     @Component({
-      standalone: true,
-      imports: [ EditorComponent, FormsModule ],
-      template: `<editor [(ngModel)]="content" />`,
-    })
+    imports: [EditorComponent, FormsModule],
+    template: `<editor [(ngModel)]="content" />`
+})
     class EditorWithNgModel {
       public content = '';
     }
