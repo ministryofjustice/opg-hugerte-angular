@@ -1,4 +1,4 @@
-/* eslint-disable max-classes-per-file */
+ 
 import '../alien/InitTestEnvironment';
 
 import { Component } from '@angular/core';
@@ -17,9 +17,9 @@ describe('NgModelTest', () => {
 
   eachVersionContext([ '1' ], () => {
     @Component({
-    imports: [EditorComponent, FormsModule],
-    template: `<editor [(ngModel)]="content" />`
-})
+      imports: [EditorComponent, FormsModule],
+      template: `<editor [(ngModel)]="content" />`
+    })
     class EditorWithNgModel {
       public content = '';
     }

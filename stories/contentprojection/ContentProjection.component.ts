@@ -1,4 +1,4 @@
-/* eslint-disable max-classes-per-file */
+ 
 import { Component, TemplateRef, Input } from '@angular/core';
 
 /*
@@ -17,15 +17,15 @@ import { Component, TemplateRef, Input } from '@angular/core';
 */
 
 @Component({
-    selector: 'container',
-    styles: [`
+  selector: 'container',
+  styles: [`
     .container {
       border: 1px solid blue;
       display: block;
       padding: 15px;
     }
   `],
-    template: `
+  template: `
     <ng-template #placeHolder>
       <p>I am a placeholder.</p>
     </ng-template>
@@ -35,7 +35,7 @@ import { Component, TemplateRef, Input } from '@angular/core';
       <ng-container *ngTemplateOutlet="show ? editorTemplate : placeHolder"></ng-container>
     <div>
   `,
-    standalone: false
+  standalone: false
 })
 export class ContainerComponent {
   @Input() public editorTemplate!: TemplateRef<any>;
@@ -47,15 +47,15 @@ export class ContainerComponent {
 }
 
 @Component({
-    selector: 'content-projection',
-    template: `
+  selector: 'content-projection',
+  template: `
     <ng-template #editorTemplate>
       <editor [(ngModel)]="editorValue"></editor>
     </ng-template>
 
     <container [editorTemplate]="editorTemplate"></container>
   `,
-    standalone: false
+  standalone: false
 })
 export class ContentProjectionComponent {
   public editorValue = '';

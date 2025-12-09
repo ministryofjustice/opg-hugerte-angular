@@ -44,9 +44,9 @@ describe('PropTest', () => {
   eachVersionContext([ '1' ], () => {
     context('Single editor with ID', () => {
       @Component({
-    imports: [EditorComponent],
-    template: `<editor id="my-id" />`
-})
+        imports: [EditorComponent],
+        template: `<editor id="my-id" />`
+      })
       class EditorWithID {}
       const createFixture = fixtureHook(EditorWithID, { imports: [ EditorWithID ] });
 
@@ -63,13 +63,13 @@ describe('PropTest', () => {
 
     context('Multiple editors', () => {
       @Component({
-    imports: [EditorComponent],
-    template: `
+        imports: [EditorComponent],
+        template: `
           @for (props of editors; track props) {
             <editor [id]="props.id" [plugins]="props.plugins" [init]="props.init" [initialValue]="props.initialValue" />
           }
         `
-})
+      })
       class MultipleEditors {
         public editors: Partial<Pick<EditorComponent, 'id' | 'init' | 'plugins' | 'initialValue'>>[] = [];
       }

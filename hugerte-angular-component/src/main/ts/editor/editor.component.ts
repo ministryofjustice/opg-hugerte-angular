@@ -45,12 +45,12 @@ const EDITOR_COMPONENT_VALUE_ACCESSOR = {
 export type Version = `${'1'}${'' | `.${number}` | `.${number}.${number}`}`;
 
 @Component({
-    selector: 'editor',
-    template: '',
-    styles: [':host { display: block; }'],
-    providers: [EDITOR_COMPONENT_VALUE_ACCESSOR],
-    imports: [CommonModule, FormsModule],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'editor',
+  template: '',
+  styles: [':host { display: block; }'],
+  providers: [EDITOR_COMPONENT_VALUE_ACCESSOR],
+  imports: [CommonModule, FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 /**
@@ -106,7 +106,7 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
     elementRef: ElementRef,
     ngZone: NgZone,
     private cdRef: ChangeDetectorRef,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: object,
     @Optional() @Inject(HUGERTE_SCRIPT_SRC) private hugerteScriptSrc?: string
   ) {
     super();
@@ -149,8 +149,8 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
             observer.complete();
           });
         })
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(this.initialise);
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(this.initialise);
       }
     }
   }
@@ -212,7 +212,7 @@ export class EditorComponent extends Events implements AfterViewInit, ControlVal
   };
 
   private getScriptSrc() {
-    let src = isNullOrUndefined(this.hugerteScriptSrc) ?
+    const src = isNullOrUndefined(this.hugerteScriptSrc) ?
       `https://cdn.jsdelivr.net/npm/hugerte@${this.cdnVersion}/hugerte.min.js` :
       this.hugerteScriptSrc;
 
