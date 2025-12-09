@@ -3208,12 +3208,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hugerte/framework-integration-shared@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@hugerte/framework-integration-shared@npm:1.0.1"
+"@hugerte/framework-integration-shared@npm:^1.0.1":
+  version: 1.2.0
+  resolution: "@hugerte/framework-integration-shared@npm:1.2.0"
   peerDependencies:
     hugerte: ^1.0.4
-  checksum: 10c0/ac3dfec4b366b020a4c213bdf3d784f1f9198346784cdf8fe3e807991241fc593e61c17367655b5fda6f08969c8e022225ff0f21ad6a314558d6dae137930982
+  checksum: 10c0/72eff54b660b5b25f11ac186c751eb9e3e6966b3b262b64df6e93eff0812edf880c1e4a4322f9feebefd6bc4a58dae5e422186bfbb41baa61f5199a6b3797e1e
   languageName: node
   linkType: hard
 
@@ -3239,7 +3239,7 @@ __metadata:
     "@ephox/agar": "npm:8.0.1"
     "@ephox/bedrock-client": "npm:^14.1.1"
     "@ephox/bedrock-server": "npm:^15.0.2"
-    "@hugerte/framework-integration-shared": "npm:1.0.1"
+    "@hugerte/framework-integration-shared": "npm:^1.0.1"
     "@storybook/addon-essentials": "npm:^8.6.8"
     "@storybook/addon-interactions": "npm:^8.6.11"
     "@storybook/addon-links": "npm:^8.2.5"
@@ -3259,7 +3259,6 @@ __metadata:
     eslint-plugin-storybook: "npm:^0.11.6"
     gh-pages: "npm:^6.1.0"
     hugerte: "npm:^1.0.4"
-    hugerte-1: "npm:hugerte@^1.0.4"
     json: "npm:11.0.0"
     ng-packagr: "npm:^18.1.0"
     react: "npm:^18.2.0"
@@ -12179,7 +12178,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hugerte-1@npm:hugerte@^1.0.4, hugerte@npm:^1.0.4":
+"hugerte@npm:^1.0.4":
   version: 1.0.7
   resolution: "hugerte@npm:1.0.7"
   checksum: 10c0/dec8e83e56dd8fe8cb4ad2f889f2de1feab078f80dff059fe3c88dc0c4e5f7b06c322ddf4020cd0bf1fb11be9335a6b3fa36e1e895aa030fdeb3493215762f12
