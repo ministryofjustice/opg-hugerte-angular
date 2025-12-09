@@ -1,10 +1,10 @@
-/* eslint-disable no-console */
+ 
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'event-binding',
-    templateUrl: './EventBinding.component.html',
-    standalone: false
+  selector: 'event-binding',
+  templateUrl: './EventBinding.component.html',
+  standalone: false
 })
 export class EventBindingComponent {
   public fieldValue = 'some value';

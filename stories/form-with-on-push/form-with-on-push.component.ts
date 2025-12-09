@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/unbound-method */
+ 
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 import {
   Component,
@@ -8,10 +8,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import type { EditorComponent } from '../../hugerte-angular-component/src/main/ts/public_api';
 
 @Component({
-    selector: 'form-with-on-push',
-    templateUrl: './form-with-on-push.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'form-with-on-push',
+  templateUrl: './form-with-on-push.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class FormWithOnPushComponent {
   public readonly initialValue = '';

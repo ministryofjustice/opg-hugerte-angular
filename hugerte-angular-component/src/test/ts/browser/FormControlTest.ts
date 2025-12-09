@@ -25,10 +25,10 @@ describe('FormControlTest', () => {
     [ ChangeDetectionStrategy.Default, ChangeDetectionStrategy.OnPush ].forEach((changeDetection) => {
       context(`[formControl] with change detection: ${changeDetection}`, () => {
         @Component({
-    imports: [EditorComponent, ReactiveFormsModule],
-    changeDetection,
-    template: `<editor [formControl]="control" />`
-})
+          imports: [EditorComponent, ReactiveFormsModule],
+          changeDetection,
+          template: `<editor [formControl]="control" />`
+        })
         class EditorWithFormControl {
           public control = new FormControl();
         }
@@ -53,23 +53,23 @@ describe('FormControlTest', () => {
 
       context(`[formGroup] with change detection: ${changeDetection}`, () => {
         @Component({
-    changeDetection,
-    imports: [EditorComponent, ReactiveFormsModule],
-    template: `
+          changeDetection,
+          imports: [EditorComponent, ReactiveFormsModule],
+          template: `
             <form [formGroup]="form">
               <editor formControlName="editor" />
               <button #resetBtn type="reset">Reset form</button>
               <button #submitBtn [disabled]="form.invalid" type="submit">Submit form</button>
             </form>
           `
-})
+        })
         class FormWithEditor {
           @ViewChild('resetBtn') public resetBtn!: ElementRef<HTMLButtonElement>;
           @ViewChild('submitBtn') public submitBtn!: ElementRef<HTMLButtonElement>;
           public readonly form = new FormGroup({
             editor: new FormControl('', {
               validators: Validators.compose([
-                // eslint-disable-next-line @typescript-eslint/unbound-method
+
                 Validators.required,
                 Validators.minLength(10),
               ]),

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'blog',
-    templateUrl: './FormValidation.component.html',
-    styles: [`
+  selector: 'blog',
+  templateUrl: './FormValidation.component.html',
+  styles: [`
     .valid {
       border: 2px solid rgb(138, 201, 138);
     }
@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
       border: 1px solid rgb(190, 190, 190);
     }
   `],
-    standalone: false
+  standalone: false
 })
 export class BlogComponent {
   public submitted = false;

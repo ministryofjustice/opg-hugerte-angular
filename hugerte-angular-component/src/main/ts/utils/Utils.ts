@@ -52,14 +52,14 @@ const parseStringProperty = (property: string | string[] | undefined, defaultVal
   return defaultValue;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
+ 
 const noop: (...args: any[]) => void = () => { };
 
 const isNullOrUndefined = (value: any): value is null | undefined => value === null || value === undefined;
 
 const isObserved = (o: Subject<unknown>): boolean =>
-  // RXJS is making the `observers` property internal in v8. So this is intended as a backwards compatible way of
-  // checking if a subject has observers.
+// RXJS is making the `observers` property internal in v8. So this is intended as a backwards compatible way of
+// checking if a subject has observers.
   o.observed || o.observers?.length > 0;
 
 export {
