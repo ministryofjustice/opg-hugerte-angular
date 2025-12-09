@@ -2,8 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { EditorComponent } from '../../hugerte-angular-component/src/main/ts/editor/editor.component';
 
 @Component({
-  selector: 'view-query',
-  templateUrl: './Viewquery.component.html'
+    selector: 'view-query',
+    templateUrl: './Viewquery.component.html',
+    standalone: false
 })
 export class ViewQueryComponent {
   @ViewChild(EditorComponent, { static: true }) public editorComponent!: EditorComponent;

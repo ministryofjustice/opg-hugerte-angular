@@ -45,13 +45,12 @@ const EDITOR_COMPONENT_VALUE_ACCESSOR = {
 export type Version = `${'1'}${'' | `.${number}` | `.${number}.${number}`}`;
 
 @Component({
-  selector: 'editor',
-  template: '',
-  styles: [ ':host { display: block; }' ],
-  providers: [ EDITOR_COMPONENT_VALUE_ACCESSOR ],
-  standalone: true,
-  imports: [ CommonModule, FormsModule ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'editor',
+    template: '',
+    styles: [':host { display: block; }'],
+    providers: [EDITOR_COMPONENT_VALUE_ACCESSOR],
+    imports: [CommonModule, FormsModule],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 /**

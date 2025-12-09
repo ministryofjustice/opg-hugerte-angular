@@ -2,8 +2,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'event-forwarding',
-  templateUrl: './EventForwarding.component.html',
+    selector: 'event-forwarding',
+    templateUrl: './EventForwarding.component.html',
+    standalone: false
 })
 export class EventForwardingComponent {
   public allowed = [ 'onMouseLeave', 'onMouseEnter' ];
