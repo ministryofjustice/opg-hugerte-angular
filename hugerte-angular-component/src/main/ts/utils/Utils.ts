@@ -25,7 +25,7 @@ const bindHandlers = (ctx: EditorComponent, editor: any, destroy$: Subject<void>
       // within the template. E.g. if the `onSelectionChange` is not listened within the template like:
       // `<editor (onSelectionChange)="..."></editor>`
       // then it won't be "observed", and we won't run "dead" change detection.
-      if (isObserved(eventEmitter)) {
+      if (eventEmitter && isObserved(eventEmitter)) {
         ctx.ngZone.run(() => eventEmitter.emit({ event, editor }));
       }
     });
@@ -52,7 +52,7 @@ const parseStringProperty = (property: string | string[] | undefined, defaultVal
   return defaultValue;
 };
 
- 
+
 const noop: (...args: any[]) => void = () => { };
 
 const isNullOrUndefined = (value: any): value is null | undefined => value === null || value === undefined;
