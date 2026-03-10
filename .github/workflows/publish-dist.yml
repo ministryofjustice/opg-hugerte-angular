@@ -13,16 +13,16 @@ jobs:
 
     steps:
       - name: Checkout source repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
 
       - name: Build dist using Docker + Makefile
         run: make build-dist
 
       - name: Checkout dist repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           repository: ministryofjustice/opg-hugerte-angular-dist
           token: ${{ secrets.GH_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
           cp -r dist/hugerte-angular/* dist-repo/
 
       - name: Create Pull Request in dist repo
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6
         with:
           token: ${{ secrets.GH_TOKEN }}
           path: dist-repo
