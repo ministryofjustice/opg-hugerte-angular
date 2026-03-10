@@ -2957,16 +2957,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ephox/bedrock-client@npm:^14.1.1":
-  version: 14.1.1
-  resolution: "@ephox/bedrock-client@npm:14.1.1"
-  dependencies:
-    "@ephox/bedrock-common": "npm:^14.1.1"
-    "@ephox/dispute": "npm:^1.0.3"
-  checksum: 10c0/b21666ad165def887a636ac760b699e369cefe92b1d1131112e7bd5b2ee554f7acc2ce8f85e7f84cff8e686420594889ddde3976f47d3a485e5ede92911d2831
-  languageName: node
-  linkType: hard
-
 "@ephox/bedrock-client@npm:^15.0.0":
   version: 15.0.0
   resolution: "@ephox/bedrock-client@npm:15.0.0"
@@ -2974,6 +2964,16 @@ __metadata:
     "@ephox/bedrock-common": "npm:^15.0.0"
     "@ephox/dispute": "npm:^1.0.3"
   checksum: 10c0/3e46a9b60de85ae1b1f933fd8647e738cc9044b4ab769ade7c1c288292e2c2eec3719d6fe44bbb52e6c134084cea0e3bc21c5898a5549f6c3d43e11014759656
+  languageName: node
+  linkType: hard
+
+"@ephox/bedrock-client@npm:^16.0.0":
+  version: 16.0.0
+  resolution: "@ephox/bedrock-client@npm:16.0.0"
+  dependencies:
+    "@ephox/bedrock-common": "npm:^16.0.0"
+    "@ephox/dispute": "npm:^1.0.3"
+  checksum: 10c0/d532c1bad00be2feddfeee5d88394c160ac930e05da3b2e35ff9409aa4c893bc505f08ae0ac25172578fce3dc358e66099ee51b86a77945d15dd25a031c2194b
   languageName: node
   linkType: hard
 
@@ -2986,21 +2986,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ephox/bedrock-common@npm:^14.1.1":
-  version: 14.1.1
-  resolution: "@ephox/bedrock-common@npm:14.1.1"
-  dependencies:
-    diff: "npm:^5.0.0"
-  checksum: 10c0/9e09b256e9d8002d636029b146b9c6c150d939a4c2cbb5694154d1b9f90e953918d397b2d6c4f609d7996d85aa09d15e1a9fbb0f5f7042d7e22dc86fb5a99631
-  languageName: node
-  linkType: hard
-
 "@ephox/bedrock-common@npm:^15.0.0":
   version: 15.0.0
   resolution: "@ephox/bedrock-common@npm:15.0.0"
   dependencies:
     diff: "npm:^5.0.0"
   checksum: 10c0/cdf227080a22647f7e34ae2ed5cf0c7a8558c189f6afa9989c106551c3b21046df43a12bb048ae88628b0abb040faa30c906031320a0f10d7201cbf941418e15
+  languageName: node
+  linkType: hard
+
+"@ephox/bedrock-common@npm:^16.0.0":
+  version: 16.0.0
+  resolution: "@ephox/bedrock-common@npm:16.0.0"
+  dependencies:
+    diff: "npm:^5.0.0"
+  checksum: 10c0/d42ee5c2eed9f14f35b25d818431499ee215599111d64ac4a854b22c4c78025a0d0be65b0d538d7aed11bff948daf8bc0345691ae7ffffa45f8c0358de06d90f
   languageName: node
   linkType: hard
 
@@ -3412,7 +3412,7 @@ __metadata:
     "@angular/platform-browser-dynamic": "npm:^19.2.17"
     "@babel/core": "npm:^7.26.10"
     "@ephox/agar": "npm:8.0.1"
-    "@ephox/bedrock-client": "npm:^14.1.1"
+    "@ephox/bedrock-client": "npm:^16.0.0"
     "@ephox/bedrock-server": "npm:^15.0.2"
     "@hugerte/framework-integration-shared": "npm:^1.0.1"
     "@storybook/addon-docs": "npm:^10.1.4"
