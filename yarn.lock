@@ -3424,7 +3424,7 @@ __metadata:
     "@types/node": "npm:^20.14.12"
     autoprefixer: "npm:^10.4.21"
     babel-loader: "npm:^9.1.3"
-    chai: "npm:^5.1.1"
+    chai: "npm:^6.0.0"
     copyfiles: "npm:^2.4.1"
     core-js: "npm:^3.36.1"
     eslint: "npm:^9.39.1"
@@ -8758,6 +8758,13 @@ __metadata:
     loupe: "npm:^3.1.0"
     pathval: "npm:^2.0.0"
   checksum: 10c0/b360fd4d38861622e5010c2f709736988b05c7f31042305fa3f4e9911f6adb80ccfb4e302068bf8ed10e835c2e2520cba0f5edc13d878b886987e5aa62483f53
+  languageName: node
+  linkType: hard
+
+"chai@npm:^6.0.0":
+  version: 6.2.2
+  resolution: "chai@npm:6.2.2"
+  checksum: 10c0/e6c69e5f0c11dffe6ea13d0290936ebb68fcc1ad688b8e952e131df6a6d5797d5e860bc55cef1aca2e950c3e1f96daf79e9d5a70fb7dbaab4e46355e2635ed53
   languageName: node
   linkType: hard
 
